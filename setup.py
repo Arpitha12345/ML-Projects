@@ -1,0 +1,23 @@
+from setuptools import find_packages,setup
+from typing import List
+
+HYPHON="-e ."
+def get_requirements(file_path:str)->List[str]:
+    requirements=[]
+    with open(file_path) as file_obj:
+        requirements=file_obj.readlines()
+        requirements=[req.replace("\n","") for req in requirements]
+
+        if HYPHON in requirements:
+            requirements.remove(HYPHON)
+
+    return requirements
+
+setup(
+    name='mlproject',
+    version='0.0.1',
+    author='Arpitha',
+    author_email='arpitha.javalli@gmail.com',
+    packages=find_packages(),
+    install_requires=get_requirements('requirements.txt')
+)
